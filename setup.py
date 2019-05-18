@@ -6,7 +6,7 @@ from threading import Thread
 
 #download images for every pokemon
 def get_images():
-    num = 800
+    num = 1
     while True:
         poke_number = format(num, '03d')
         url = 'https://www.serebii.net/pokemon/art/' + poke_number + '.png'
@@ -23,10 +23,11 @@ def get_images():
             break
         else:
             print(response.status_code + ' error')
+            break
 
 #setup info for every pokemon
 def get_data():
-    num = 800
+    num = 1
     while True:
         poke_number = str(num)
         url_1 = 'https://pokeapi.co/api/v2/pokemon/' + poke_number + '/'
@@ -39,14 +40,15 @@ def get_data():
             json_data_2 = json.loads(response_2.text)
             poke_data = {
                 'name' : json_data_1['name'],
-                'number' : json_data_1['id'],
+                'number' : format(json_data_1['id'], '03d'),
                 'height' : json_data_1['height'],
                 'weight' : json_data_1['weight'],
                 'color' : json_data_2['color']['name'],
                 'description' : json_data_2['flavor_text_entries'][2]['flavor_text']
             }
             pokemon = json.dumps(poke_data)
-            f = open(path + str(json_data_1['id']) + '_' + json_data_1['name'] + '.json', 'w')
+            
+            f = open(path + format(json_data_1['id'], '03d') + '_' + json_data_1['name'] + '.json', 'w')
             f.write(pokemon)
             print('Pokemon data for for ' + json_data_1['name'] + ' downloaded.')
             num+=1
@@ -55,9 +57,10 @@ def get_data():
             break
         else:
             print(response_1.status_code + 'for response 1 and ' + response_2.status_code + ' for response 2.')
+            break
     
     
 
 if __name__ == '__main__':
-    Thread(target = get_images).start()
+    #Thread(target = get_images).start()
     Thread(target = get_data).start()

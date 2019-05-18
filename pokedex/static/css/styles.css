@@ -1,5 +1,10 @@
 body{ background-color: black; color: white; }
 
-nav{ background-color: #3D7DCA; }
+nav{ background-color: #3D7DCA; border-bottom: solid black 3px;}
+nav:hover{ opacity: .9; }
 
 #img_nav{ background-color: black; border: white 3px solid; border-radius: 15%; }
+img{  background-color: white; }
+
+.card{ background-color: #3D7DCA; margin: 25px; } 
+.card:hover{ opacity: .9; }
