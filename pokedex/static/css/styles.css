@@ -1,10 +1,10 @@
-body{ background-color: black; color: white; }
+body{ background-color: black; color: white; margin-bottom: 100px;}
 
 nav{ background-color: #3D7DCA; border-bottom: solid black 3px;}
-nav:hover{ opacity: .9; }
+nav:hover{ opacity: .9 !important; }
 
-#img_nav{ background-color: black; border: white 3px solid; border-radius: 15%; }
+#img_nav{ background-color: black; border: white 2px solid; border-radius: 15%; }
 img{  background-color: white; }
 
-.card{ background-color: #3D7DCA; margin-bottom: 50px; margin-left: 50px; } 
-.card:hover{ opacity: .9; }
+.card{ background-color: #3D7DCA; margin-bottom: 70px; margin-left: 70px; border: solid black 3px;} 
+.card:hover{ opacity: .9 !important; }

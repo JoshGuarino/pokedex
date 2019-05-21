@@ -3,15 +3,23 @@
 {% block main %}
 
 <div class="row">
-{% for i in range(0, 25) %}
-<div class="card" style="width: 12rem;" data-aos="flip-down" data-aos-duration="700" id="">
-    <img src="/static/pokemon/pics/{{ pokemon_data[i]['number'] }}.png"  class="card-img-top" alt="{{ pokemon_data[i]['name'] }}">
+{% for i in range(0, 20) %}
+<div class="card text-center justify-content-center" style="width: 12rem;" data-aos="zoom-in" data-aos-duration="700" id="">
+    <img src="/static/pokemon/pics/{{ pokemon_data[i]['number'] }}.png"  class="card-img-top lozad" alt="{{ pokemon_data[i]['name'] }}">
     <div class="card-body">
         <h5 class="card-title">{{ pokemon_data[i]['number'] }} {{ pokemon_data[i]['name'] }}</h5>
         <a href="/pokemon" class="btn btn-secondary">View Pokemon</a>
     </div>
 </div>
 {% endfor %}
+</div>
+
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+
+    </div>
+    <div class="col-4"></div>
 </div>
 
 {% endblock main %}

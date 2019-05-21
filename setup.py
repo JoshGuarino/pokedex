@@ -44,13 +44,14 @@ def get_data():
                 'height' : json_data_1['height'],
                 'weight' : json_data_1['weight'],
                 'color' : json_data_2['color']['name'],
-                'description' : json_data_2['flavor_text_entries'][2]['flavor_text']
+                'description' : json_data_2['flavor_text_entries'][2]['flavor_text'],
+                'generation' : json_data_2['generation']['name']
             }
             pokemon = json.dumps(poke_data)
             
             f = open(path + format(json_data_1['id'], '03d') + '_' + json_data_1['name'] + '.json', 'w')
             f.write(pokemon)
-            print('Pokemon data for for ' + json_data_1['name'] + ' downloaded.')
+            print('Pokemon data for for ' + str(num) + '-' + json_data_1['name'] + ' downloaded.')
             num+=1
         elif response_1.status_code==404 and response_2.status_code==404:
             print('\n** Pokemon data directory download complete. **\n')
@@ -62,5 +63,5 @@ def get_data():
     
 
 if __name__ == '__main__':
-    #Thread(target = get_images).start()
+    Thread(target = get_images).start()
     Thread(target = get_data).start()
