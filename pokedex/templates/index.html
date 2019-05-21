@@ -3,21 +3,35 @@
 {% block main %}
 
 <div class="row">
-{% for i in range(0, 20) %}
-<div class="card text-center justify-content-center" style="width: 12rem;" data-aos="zoom-in" data-aos-duration="700" id="">
-    <img src="/static/pokemon/pics/{{ pokemon_data[i]['number'] }}.png"  class="card-img-top lozad" alt="{{ pokemon_data[i]['name'] }}">
-    <div class="card-body">
-        <h5 class="card-title">{{ pokemon_data[i]['number'] }} {{ pokemon_data[i]['name'] }}</h5>
-        <a href="/pokemon" class="btn btn-secondary">View Pokemon</a>
+    {% for i in range(0, 50) %}
+    <div class="card text-center justify-content-center" style="width: 12rem;" data-aos="zoom-in"
+        data-aos-duration="700" id="">
+        <img src="/static/pokemon/pics/{{ pokemon_data[i]['number'] }}.png" class="card-img-top lozad"
+            alt="{{ pokemon_data[i]['name'] }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ pokemon_data[i]['number'] }} {{ pokemon_data[i]['name'] }}</h5>
+            <a href="/pokemon" class="btn btn-secondary">View Pokemon</a>
+        </div>
     </div>
-</div>
-{% endfor %}
+    {% endfor %}
 </div>
 
 <div class="row">
     <div class="col-4"></div>
     <div class="col-4">
 
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+        
     </div>
     <div class="col-4"></div>
 </div>

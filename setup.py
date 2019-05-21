@@ -3,11 +3,21 @@ import shutil
 import json
 from threading import Thread
 
+#get total number of pokemon
+def get_poke_count():
+    url = 'https://pokeapi.co/api/v2/pokemon-species/'
+    response = requests.get(url, stream=True)
+    if response.status_code==200:
+        json_data = json.loads(response.text)
+        print('\n** Pokemon count found. Initializing download of data. **\n')
+        return json_data['count']
+    else:
+        print(response.status_code + ' error')
 
 #download images for every pokemon
 def get_images():
     num = 1
-    while True:
+    while num <= poke_total:
         poke_number = format(num, '03d')
         url = 'https://www.serebii.net/pokemon/art/' + poke_number + '.png'
         path = 'pokedex/static/pokemon/pics/' + poke_number + '.png'
@@ -17,10 +27,9 @@ def get_images():
                 shutil.copyfileobj(response.raw, out_file)
             del response
             print('Pokemon image for #' + poke_number + ' downloaded.')
+            if num == poke_total:
+                print('\n** Pokemon image directory download complete. **\n')
             num+=1
-        elif response.status_code == 404:
-            print('\n** Pokemon image directory download complete. **\n')
-            break
         else:
             print(response.status_code + ' error')
             break
@@ -28,7 +37,7 @@ def get_images():
 #setup info for every pokemon
 def get_data():
     num = 1
-    while True:
+    while num <= poke_total:
         poke_number = str(num)
         url_1 = 'https://pokeapi.co/api/v2/pokemon/' + poke_number + '/'
         url_2 = 'https://pokeapi.co/api/v2/pokemon-species/' + poke_number + '/'
@@ -44,18 +53,17 @@ def get_data():
                 'height' : json_data_1['height'],
                 'weight' : json_data_1['weight'],
                 'color' : json_data_2['color']['name'],
-                'description' : json_data_2['flavor_text_entries'][2]['flavor_text'],
-                'generation' : json_data_2['generation']['name']
+                'description' : json_data_2['flavor_text_entries'][1]['flavor_text'],
+                'gen' : json_data_2['generation']['name']
             }
             pokemon = json.dumps(poke_data)
             
             f = open(path + format(json_data_1['id'], '03d') + '_' + json_data_1['name'] + '.json', 'w')
             f.write(pokemon)
             print('Pokemon data for for ' + str(num) + '-' + json_data_1['name'] + ' downloaded.')
+            if num == poke_total:
+                print('\n** Pokemon data directory download complete. **\n')
             num+=1
-        elif response_1.status_code==404 and response_2.status_code==404:
-            print('\n** Pokemon data directory download complete. **\n')
-            break
         else:
             print(response_1.status_code + 'for response 1 and ' + response_2.status_code + ' for response 2.')
             break
@@ -63,5 +71,8 @@ def get_data():
     
 
 if __name__ == '__main__':
-    Thread(target = get_images).start()
-    Thread(target = get_data).start()
+    poke_total = get_poke_count()
+    #poke_total = 151
+    if poke_total!=None and type(poke_total)==int:
+        Thread(target = get_images).start()
+        Thread(target = get_data).start()
