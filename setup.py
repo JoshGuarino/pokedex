@@ -16,8 +16,7 @@ def get_poke_count():
 
 #download images for every pokemon
 def get_images():
-    num = 1
-    while num <= poke_total:
+    for num in range(1 , poke_total+1):
         poke_number = format(num, '03d')
         url = 'https://www.serebii.net/pokemon/art/' + poke_number + '.png'
         path = 'pokedex/static/pokemon/pics/' + poke_number + '.png'
@@ -31,13 +30,12 @@ def get_images():
                 print('\n** Pokemon image directory download complete. **\n')
             num+=1
         else:
-            print(response.status_code + ' error')
+            print(str(response.status_code) + ' error')
             break
 
 #setup info for every pokemon
 def get_data():
-    num = 1
-    while num <= poke_total:
+    for num in range(1 , poke_total+1):
         poke_number = str(num)
         url_1 = 'https://pokeapi.co/api/v2/pokemon/' + poke_number + '/'
         url_2 = 'https://pokeapi.co/api/v2/pokemon-species/' + poke_number + '/'
@@ -63,16 +61,15 @@ def get_data():
             print('Pokemon data for for ' + str(num) + '-' + json_data_1['name'] + ' downloaded.')
             if num == poke_total:
                 print('\n** Pokemon data directory download complete. **\n')
-            num+=1
         else:
-            print(response_1.status_code + 'for response 1 and ' + response_2.status_code + ' for response 2.')
+            print(str(response_1.status_code) + ' for response 1 and ' + str(response_2.status_code) + ' for response 2.')
             break
     
     
 
 if __name__ == '__main__':
     poke_total = get_poke_count()
-    #poke_total = 151
+    #poke_total = 150
     if poke_total!=None and type(poke_total)==int:
         Thread(target = get_images).start()
         Thread(target = get_data).start()

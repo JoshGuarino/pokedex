@@ -28,5 +28,13 @@ def search():
     query = request.form['search']
     return render_template('search.html', query=query)
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('error.html', the_error="404 Not Found", message="Sorry! The page you requested doesn't exist..."), 404
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('error.html', the_error="500 Internal Server Error", message="Sorry! We are experiencing technical difficulties..."), 500    
+
 if __name__ == '__main__':
     app.run()
