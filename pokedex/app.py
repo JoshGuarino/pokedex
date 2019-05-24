@@ -40,15 +40,14 @@ def index():
 def index_pages(page):
     try:
         page = int(page)
-        print(page)
-    except ValueError:
-        return render_template('error.html', the_error="404 Not Found", message="Sorry! The page you requested doesn't exist...")
-    try:
         current_page = pages[page-1]
+    except ValueError:
+        return render_template('error.html', the_error="To request page, param must be a number."), 404
     except:
-        return render_template('error.html', the_error="404 Not Found", message="Sorry! The page you requested doesn't exist...")        
+        return render_template('error.html', the_error="The requested page doesn't exist."), 404
+        
     if page < 1:
-        return render_template('error.html', the_error="404 Not Found", message="Sorry! The page you requested doesn't exist...")
+        return render_template('error.html', the_error="The requested page doesn't exist."), 404
     else:
         return render_template('index.html', data=pokemon_data, start=current_page['start'], end=current_page['end'])
 
@@ -66,12 +65,12 @@ def search():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('error.html', the_error="404 Not Found", message="Sorry! The page you requested doesn't exist..."), 404
+    return render_template('error.html', the_error=e), 404
 
 
 @app.errorhandler(500)
 def internal_server_error(e):
-    return render_template('error.html', the_error="500 Internal Server Error", message="Sorry! We are experiencing technical difficulties..."), 500    
+    return render_template('error.html', the_error=e), 500    
 
 if __name__ == '__main__':
     app.run()
