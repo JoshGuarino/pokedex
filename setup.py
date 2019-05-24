@@ -12,7 +12,7 @@ def get_poke_count():
         print('\n** Pokemon count found. Initializing download of data. **\n')
         return json_data['count']
     else:
-        print(response.status_code + ' error')
+        print(str(response.status_code) + ' error')
 
 #download images for every pokemon
 def get_images():
@@ -47,7 +47,8 @@ def get_data():
             json_data_2 = json.loads(response_2.text)
             poke_data = {
                 'name' : json_data_1['name'],
-                'number' : format(json_data_1['id'], '03d'),
+                'number' : json_data_1['id'],
+                'number_label' :  format(json_data_1['id'], '03d'),
                 'height' : json_data_1['height'],
                 'weight' : json_data_1['weight'],
                 'color' : json_data_2['color']['name'],

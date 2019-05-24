@@ -4,3 +4,4 @@ class Config(object):
     SECRET_KEY = generate_key()
     DEBUG = True 
     THREADED = True
+    RESULTS_PER_PAGE = 40
