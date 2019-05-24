@@ -5,6 +5,7 @@ import os
 import json
 import math
 
+
 app = Flask(__name__)
 app.config.from_object(Config)
 
@@ -16,6 +17,7 @@ for item in pokemon_directory:
         data = file.read()
     pokemon = json.loads(data)
     pokemon_data.append(pokemon)
+
 page_total = math.ceil(len(pokemon_data) / num_results)
 pages = []
 page_range_index = { 'start': 0, 'end': num_results }
