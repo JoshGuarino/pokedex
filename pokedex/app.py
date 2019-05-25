@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from flask_paginate import Pagination
+
 from config import Config
 import os
 import json
@@ -34,7 +34,7 @@ for page in range(0, page_total):
 @app.route("/index")
 def index():
     print(pages)
-    return render_template('index.html', data=pokemon_data, start=0, end=num_results)
+    return render_template('index.html', data=pokemon_data, start=0, end=num_results, page_num=1, page_total=page_total)
 
 
 @app.route('/<page>')
@@ -51,7 +51,7 @@ def index_pages(page):
     if page < 1:
         return render_template('error.html', the_error="The requested page doesn't exist."), 404
     else:
-        return render_template('index.html', data=pokemon_data, start=current_page['start'], end=current_page['end'])
+        return render_template('index.html', data=pokemon_data, start=current_page['start'], end=current_page['end'], page_num=page, page_total=page_total)
 
 
 @app.route("/pokemon")
