@@ -1,7 +1,9 @@
-body{ background-color: black; color: white; margin-bottom: 100px;}
+body{ background-color: white; color: white; margin-bottom: 100px;}
 
-nav{ background-color: #3D7DCA;}
-nav:hover{ opacity: .9 !important; }
+.container{ background-color:black; border-radius: 10px;}
+
+nav{ background-color: #3D7DCA; opacity: .9 !important; }
+nav:hover{ opacity: 1 !important; }
 
 #img_nav{ background-color: black; border: white 2px solid; border-radius: 10px; }
 img{  background-color: white; }

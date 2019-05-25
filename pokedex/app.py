@@ -33,7 +33,6 @@ for page in range(0, page_total):
 @app.route("/")
 @app.route("/index")
 def index():
-    print(pages)
     return render_template('index.html', data=pokemon_data, start=0, end=num_results, page_num=1, page_total=page_total)
 
 

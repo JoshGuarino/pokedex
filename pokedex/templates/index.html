@@ -3,8 +3,8 @@
 {% block main %}
 <br><br>
 <div class="row">
-    <div class="col-4"></div>
-    <div class="col-4">
+    <div class="col"></div>
+    <div class="col">
         <ul class="pagination" data-aos="zoom-in" data-aos-duration="700">
             {% if page_num != 1 %}
             <li class="page-item"><a class="page-link" href="/{{ page_num-1 }}">Previous</a></li>
@@ -21,13 +21,13 @@
             {% endif %}
         </ul>
     </div>
-    <div class="col-4"></div>
+    <div class="col"></div>  
 </div>
 <br><br>
 
 <div class="row">
     {% for i in range(start, end) %}
-    <div class="card text-center justify-content-center" style="width: 12rem;" data-aos="zoom-in" data-aos-duration="700">
+    <div class="card text-center justify-content-center shadow" style="width: 12rem;" data-aos="zoom-in" data-aos-duration="700">
         <img src="/static/pokemon/pics/{{ data[i]['number_label'] }}.png" class="card-img-top lozad"
             alt="{{ data[i]['name'] }}">
         <div class="card-body">
@@ -38,9 +38,10 @@
     {% endfor %}
 </div>
 
+<br><br>
 <div class="row">
-    <div class="col-4"></div>
-    <div class="col-4">
+    <div class="col"></div>
+    <div class="col">
         <ul class="pagination" data-aos="zoom-in" data-aos-duration="700">
             {% if page_num != 1 %}
             <li class="page-item"><a class="page-link" href="/{{ page_num-1 }}">Previous</a></li>
@@ -57,7 +58,7 @@
             {% endif %}
         </ul>
     </div>
-    <div class="col-4"></div>
+    <div class="col"></div>
 </div>
-
+<br><br>
 {% endblock main %}
