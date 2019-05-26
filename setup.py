@@ -1,3 +1,5 @@
+import os
+import subprocess
 import requests
 import shutil
 import json
@@ -20,18 +22,23 @@ def get_images():
         poke_number = format(num, '03d')
         url = 'https://www.serebii.net/pokemon/art/' + poke_number + '.png'
         path = 'pokedex/static/pokemon/pics/' + poke_number + '.png'
-        response = requests.get(url, stream=True)
-        if response.status_code == 200:
-            with open(path, 'wb') as out_file:
-                shutil.copyfileobj(response.raw, out_file)
-            del response
-            print('Pokemon image for #' + poke_number + ' downloaded.')
-            if num == poke_total:
-                print('\n** Pokemon image directory download complete. **\n')
-            num+=1
+        exists = os.path.isfile(path)
+        if exists:
+            print('Image for #' + poke_number + ' already exists.')
         else:
-            print(str(response.status_code) + ' error')
-            break
+            response = requests.get(url, stream=True)
+            if response.status_code == 200:
+                with open(path, 'wb') as out_file:
+                    shutil.copyfileobj(response.raw, out_file)
+                del response
+                print('Pokemon image for #' + poke_number + ' downloaded.')
+                if num == poke_total:
+                    print('\n** Pokemon image directory download complete. **\n')
+                num+=1
+            else:
+                print(str(response.status_code) + ' error')
+                break
+            
 
 #setup info for every pokemon
 def get_data():
@@ -65,12 +72,21 @@ def get_data():
         else:
             print(str(response_1.status_code) + ' for response 1 and ' + str(response_2.status_code) + ' for response 2.')
             break
-    
-    
+
+#terminal commands to run the app
+def run_commands():
+    subprocess.call(["pipenv", "install"])
+    os.chdir('pokedex')
+    subprocess.call(["py", "app.py"])
 
 if __name__ == '__main__':
     poke_total = get_poke_count()
     #poke_total = 150
     if poke_total!=None and type(poke_total)==int:
-        Thread(target = get_images).start()
-        Thread(target = get_data).start()
+        t1 = Thread(target = get_images)
+        t2 = Thread(target = get_data)
+        t1.start()
+        t2.start()
+        t1.join()
+        t2.join()
+    run_commands()
