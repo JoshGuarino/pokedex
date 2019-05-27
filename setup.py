@@ -89,4 +89,6 @@ if __name__ == '__main__':
         t2.start()
         t1.join()
         t2.join()
-    run_commands()
+        run_commands()
+    else:
+        print('Error, poke_total not a number or not set.')
