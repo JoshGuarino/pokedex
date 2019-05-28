@@ -57,12 +57,12 @@ def get_data():
                     description = json_data_2['flavor_text_entries'][item]['flavor_text']
                     break
             poke_data = {
-                'name' : json_data_1['name'],
+                'name' : json_data_1['name'].title(),
                 'number' : json_data_1['id'],
                 'number_label' :  format(json_data_1['id'], '03d'),
                 'height' : json_data_1['height'],
                 'weight' : json_data_1['weight'],
-                'color' : json_data_2['color']['name'],
+                'color' : json_data_2['color']['name'].title(),
                 'description' : description,
                 'gen' : json_data_2['generation']['name']
             }

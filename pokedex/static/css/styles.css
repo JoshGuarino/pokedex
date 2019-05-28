@@ -6,10 +6,14 @@ nav{ background-color: #3D7DCA; opacity: .9 !important; }
 nav:hover{ opacity: 1 !important; }
 
 #img_nav{ background-color: black; border: white 2px solid; border-radius: 10px; }
-img{  background-color: white; }
+img{  background-color: white; border-radius: 10px; }
+#img_pokemon{  background-color: #222222; margin: 50px; }
 
-.card{ background-color: #3D7DCA; margin-bottom: 70px; margin-left: 70px;  border-radius: 10px; } 
+.card{ background-color: #3D7DCA; margin-bottom: 55px; margin-left: 55px;  border-radius: 10px; } 
 .card:hover{ opacity: .9 !important; }
+.btn{ font-size: 12.5px; }
+
+.table{ color: white !important; background-color: #3D7DCA !important; border: white solid 2px; }
 
 #error{ background-color: #3D7DCA; border-radius: 10px; }
 

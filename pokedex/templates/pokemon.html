@@ -3,12 +3,34 @@
 {% block main %}
 <div class="row text-center justify-content-center">
     <div class="col">
-            <img src="/static/pokemon/pics/{{ pokemon['number_label'] }}.png" class="card-img-top" alt="{{ pokemon['name'] }}">
-        
+        <img id="img_pokemon" src="/static/pokemon/pics/{{ pokemon['number_label'] }}.png" class="card-img-top"
+            alt="{{ pokemon['name'] }}">
     </div>
+    <div class="col-1"></div>
     <div class="col">
-        {{ pokemon['name'] }}
-        {{ pokemon['description'] }}
+        <br><br>
+        <h2>{{ pokemon['name'] }}</h2>
+        <br>
+        <p>{{ pokemon['description'] }}</p>
+        <br><br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Color</th>
+                    <th>Height</th>
+                    <th>Weight</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ pokemon['number'] }}</td>
+                    <td>{{ pokemon['color'] }}</td>
+                    <td>{{ pokemon['height']/10 }} m</td>
+                    <td>{{ pokemon['weight']/10 }} kg</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock main %}
