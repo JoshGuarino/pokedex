@@ -28,7 +28,6 @@ for page in range(0, page_total):
     if page_range_index['end'] > len(pokemon_data):
         page_range_index['end'] = len(pokemon_data)
 
-
 @app.route("/")
 @app.route("/index")
 def index():
@@ -52,9 +51,11 @@ def index_pages(page):
         return render_template('index.html', data=pokemon_data, start=current_page['start'], end=current_page['end'], page_num=page, page_total=page_total)
 
 
-@app.route("/pokemon")
-def pokemon():
-    return render_template('pokemon.html')
+@app.route("/pokemon/<pokemon>")
+def pokemon(pokemon):
+    poke_num = int(pokemon)
+    current_pokemon = pokemon_data[poke_num-1]
+    return render_template('pokemon.html', pokemon=current_pokemon)
 
 
 @app.route("/search", methods=['POST'])    

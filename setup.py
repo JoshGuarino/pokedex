@@ -52,6 +52,10 @@ def get_data():
         if response_1.status_code==200 and response_2.status_code==200:
             json_data_1 = json.loads(response_1.text)
             json_data_2 = json.loads(response_2.text)
+            for item in range(len(json_data_2['flavor_text_entries'])):
+                if json_data_2['flavor_text_entries'][item]['language']['name'] == 'en':
+                    description = json_data_2['flavor_text_entries'][item]['flavor_text']
+                    break
             poke_data = {
                 'name' : json_data_1['name'],
                 'number' : json_data_1['id'],
@@ -59,7 +63,7 @@ def get_data():
                 'height' : json_data_1['height'],
                 'weight' : json_data_1['weight'],
                 'color' : json_data_2['color']['name'],
-                'description' : json_data_2['flavor_text_entries'][1]['flavor_text'],
+                'description' : description,
                 'gen' : json_data_2['generation']['name']
             }
             pokemon = json.dumps(poke_data)
@@ -80,8 +84,8 @@ def run_commands():
     subprocess.call(["py", "app.py"])
 
 if __name__ == '__main__':
-    poke_total = get_poke_count()
-    #poke_total = 150
+    #poke_total = get_poke_count()
+    poke_total = 150
     if poke_total!=None and type(poke_total)==int:
         t1 = Thread(target = get_images)
         t2 = Thread(target = get_data)
@@ -89,6 +93,6 @@ if __name__ == '__main__':
         t2.start()
         t1.join()
         t2.join()
-        run_commands()
+        #run_commands()
     else:
         print('Error, poke_total not a number or not set.')

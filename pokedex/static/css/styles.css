@@ -1,6 +1,6 @@
 body{ background-color: white; color: white; margin-bottom: 100px; }
 
-.container{ background-color:black; border-radius: 10px; }
+.container{ background-color:#222222; border-radius: 10px; }
 
 nav{ background-color: #3D7DCA; opacity: .9 !important; }
 nav:hover{ opacity: 1 !important; }
@@ -23,5 +23,5 @@ img{  background-color: white; }
     right: 0;
     bottom: 0;
     z-index: 1000 !important;
-    background-color: black;
+    background-color: #222222;
 }

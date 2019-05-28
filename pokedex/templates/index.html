@@ -28,11 +28,10 @@
 <div class="row">
     {% for i in range(start, end) %}
     <div class="card text-center justify-content-center shadow" style="width: 12rem;" data-aos="zoom-in" data-aos-duration="700">
-        <img src="/static/pokemon/pics/{{ data[i]['number_label'] }}.png" class="card-img-top lozad"
-            alt="{{ data[i]['name'] }}">
+        <img src="/static/pokemon/pics/{{ data[i]['number_label'] }}.png" class="card-img-top" alt="{{ data[i]['name'] }}">
         <div class="card-body">
             <h6 class="card-title">{{ data[i]['number'] }} - {{ data[i]['name'] }}</h6>
-            <a href="/pokemon" class="btn btn-secondary">View Pokemon</a>
+            <a href="/pokemon/{{ data[i]['number'] }}" class="btn btn-secondary">View Pokemon</a>
         </div>
     </div>
     {% endfor %}
