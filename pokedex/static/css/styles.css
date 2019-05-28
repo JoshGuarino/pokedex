@@ -1,6 +1,6 @@
-body{ background-color: white; color: white; margin-bottom: 100px;}
+body{ background-color: white; color: white; margin-bottom: 100px; }
 
-.container{ background-color:black; border-radius: 10px;}
+.container{ background-color:black; border-radius: 10px; }
 
 nav{ background-color: #3D7DCA; opacity: .9 !important; }
 nav:hover{ opacity: 1 !important; }
@@ -12,3 +12,16 @@ img{  background-color: white; }
 .card:hover{ opacity: .9 !important; }
 
 #error{ background-color: #3D7DCA; border-radius: 10px; }
+
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000 !important;
+    background-color: black;
+}

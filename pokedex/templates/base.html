@@ -13,7 +13,31 @@
 
 </head>
 
-<body>
+<body onload="off()">
+  <div id="overlay">
+    <br><br>
+    <div class="d-flex justify-content-center">
+      <img id="img_nav" src="/static/images/pokeball.png" width="200" height="200" alt="">
+    </div>
+
+    <br><br><br><br>
+
+    <div class="d-flex justify-content-center">
+      <div class="spinner-grow text-primary" role="status" style="width: 4rem; height: 4rem;"></div>
+      <div class="spinner-grow text-primary" role="status" style="width: 4rem; height: 4rem;"></div>
+      <div class="spinner-grow text-primary" role="status" style="width: 4rem; height: 4rem;"></div>
+      <div class="spinner-grow text-primary" role="status" style="width: 4rem; height: 4rem;"></div>
+      <div class="spinner-grow text-primary" role="status" style="width: 4rem; height: 4rem;"></div>
+      <div class="spinner-grow text-primary" role="status" style="width: 4rem; height: 4rem;"></div>
+    </div>
+
+    <br><br><br><br>
+
+    <div class="d-flex justify-content-center">
+      <h2>Loading Pokemon data...</h2>
+    </div>
+
+  </div>
 
   {% include 'header.html' %}
 
