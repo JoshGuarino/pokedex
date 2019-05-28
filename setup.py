@@ -84,8 +84,8 @@ def run_commands():
     subprocess.call(["py", "app.py"])
 
 if __name__ == '__main__':
-    #poke_total = get_poke_count()
-    poke_total = 150
+    poke_total = get_poke_count()
+    #poke_total = 150
     if poke_total!=None and type(poke_total)==int:
         t1 = Thread(target = get_images)
         t2 = Thread(target = get_data)
@@ -93,6 +93,6 @@ if __name__ == '__main__':
         t2.start()
         t1.join()
         t2.join()
-        #run_commands()
+        run_commands()
     else:
         print('Error, poke_total not a number or not set.')
