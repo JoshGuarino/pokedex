@@ -61,7 +61,11 @@ def pokemon(pokemon):
 @app.route("/search", methods=['POST'])    
 def search():
     query = request.form['search']
-    return render_template('search.html', query=query)
+    search_list = []
+    for item in pokemon_data:
+        if query in item['name'].lower() or query in str(item['number']):
+            search_list.append(item)
+    return render_template('search.html', query=query, search_list=search_list)
 
 
 @app.errorhandler(404)

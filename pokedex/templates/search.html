@@ -1,5 +1,28 @@
 {% extends 'base.html' %}
 
 {% block main %}
+<br><br>
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <h2>Search Results for: '{{ query }}'</h2>
+    </div>
+    <div class="col-3"></div>
+</div>
+<br><br>
+
+<div class="row">
+    {% for item in search_list %}
+    <div class="card text-center justify-content-center shadow" style="width: 10rem;" data-aos="zoom-in"data-aos-duration="700">
+        <img src="/static/pokemon/pics/{{ item['number_label'] }}.png" class="card-img-top" alt="{{ item['name'] }}">
+        <div class="card-body">
+            <h6 class="card-title">{{ item['number'] }} - {{ item['name'] }}</h6>
+            <a href="/pokemon/{{ item['number'] }}" class="btn btn-secondary">View Pokemon</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<br><br>
+
 
 {% endblock main %}
