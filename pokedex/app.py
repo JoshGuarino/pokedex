@@ -16,8 +16,9 @@ for item in pokemon_directory:
         data = file.read()
     pokemon = json.loads(data)
     pokemon_data.append(pokemon)
+poke_total = len(pokemon_data)   
 
-page_total = math.ceil(len(pokemon_data) / num_results)
+page_total = math.ceil(poke_total / num_results)
 pages = []
 page_range_index = { 'start': 0, 'end': num_results }
 for page in range(0, page_total):
@@ -25,8 +26,8 @@ for page in range(0, page_total):
     pages.append(page)
     page_range_index['start'] += num_results
     page_range_index['end'] += num_results
-    if page_range_index['end'] > len(pokemon_data):
-        page_range_index['end'] = len(pokemon_data)
+    if page_range_index['end'] > poke_total:
+        page_range_index['end'] = poke_total
 
 @app.route("/")
 @app.route("/index")
@@ -55,7 +56,7 @@ def index_pages(page):
 def pokemon(pokemon):
     poke_num = int(pokemon)
     current_pokemon = pokemon_data[poke_num-1]
-    return render_template('pokemon.html', pokemon=current_pokemon)
+    return render_template('pokemon.html', pokemon=current_pokemon, poke_total=poke_total)
 
 
 @app.route("/search", methods=['POST'])    

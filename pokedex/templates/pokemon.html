@@ -3,11 +3,10 @@
 {% block main %}
 <div class="row text-center justify-content-center">
     <div class="col">
-        <img id="img_pokemon" src="/static/pokemon/pics/{{ pokemon['number_label'] }}.png" class="card-img-top"
-            alt="{{ pokemon['name'] }}">
+        <img data-aos="zoom-in" data-aos-duration="700" id="img_pokemon" src="/static/pokemon/pics/{{ pokemon['number_label'] }}.png" class="card-img-top" alt="{{ pokemon['name'] }}">
     </div>
     <div class="col-1"></div>
-    <div class="col">
+    <div class="col" data-aos="zoom-in" data-aos-duration="700">
         <br><br>
         <h2>{{ pokemon['name'] }}</h2>
         <br>
@@ -32,5 +31,25 @@
             </tbody>
         </table>
     </div>
+</div>
+<div class="row">
+    <div class="col-5"></div>
+    <div class="col-2">
+        <ul class="pagination" data-aos="zoom-in" data-aos-duration="700">
+            {% if pokemon['number'] != 1 %}
+            <li class="page-item"><a class="page-link" href="/pokemon/{{ pokemon['number']-1 }}">Previous</a></li>
+            {% else %}
+            <li class="page-item disabled"><a class="page-link" disabled href="">Previous</a></li>
+            {% endif %}
+
+            {% if pokemon['number'] != poke_total %}
+            <li class="page-item"><a class="page-link" href="/pokemon/{{ pokemon['number']+1 }}">Next</a></li>
+            {% else %}
+            <li class="page-item disabled"><a class="page-link" href="">Next</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="col-5"></div>
+</div>
 </div>
 {% endblock main %}
