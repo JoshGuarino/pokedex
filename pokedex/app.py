@@ -52,6 +52,10 @@ def index_pages(page):
         return render_template('index.html', data=pokemon_data, start=current_page['start'], end=current_page['end'], page_num=page, page_total=page_total)
 
 
+@app.route('/table')
+def table():
+    return render_template('table.html', data=pokemon_data)
+
 @app.route("/pokemon/<pokemon>")
 def pokemon(pokemon):
     poke_num = int(pokemon)

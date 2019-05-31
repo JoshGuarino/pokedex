@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Number</th>
+                <th>Color</th>
+                <th>Height</th>
+                <th>Weight</th>
+                <th>Entry</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{ item['name'] }}</td>
+                <td>{{ item['number'] }}</td>
+                <td>{{ item['color'] }}</td>
+                <td>{{ item['height']/10 }} m</td>
+                <td>{{ item['weight']/10 }} kg</td>
+                <td><a href="/pokemon/{{ item['number'] }}" class="btn btn-secondary">View Pokemon</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock main %}
