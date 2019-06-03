@@ -56,11 +56,21 @@ def index_pages(page):
 def table():
     return render_template('table.html', data=pokemon_data)
 
+
 @app.route("/pokemon/<pokemon>")
 def pokemon(pokemon):
-    poke_num = int(pokemon)
-    current_pokemon = pokemon_data[poke_num-1]
-    return render_template('pokemon.html', pokemon=current_pokemon, poke_total=poke_total)
+    try:
+        poke_num = int(pokemon)
+        current_pokemon = pokemon_data[poke_num-1] 
+    except ValueError:
+        return render_template('error.html', the_error="To request page, param must be a number."), 404
+    except:
+        return render_template('error.html', the_error="The requested page doesn't exist."), 404
+
+    if poke_num < 1:
+        return render_template('error.html', the_error="The requested page doesn't exist."), 404
+    else:    
+        return render_template('pokemon.html', pokemon=current_pokemon, poke_total=poke_total)
 
 
 @app.route("/search", methods=['POST'])    
