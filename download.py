@@ -87,7 +87,7 @@ def get_data():
 
 if __name__ == '__main__':
     subprocess.call(["pipenv", "install"] ) 
-    poke_total = 150
+    poke_total = get_poke_count()
     if poke_total!=None and type(poke_total)==int:
         t1 = Thread(target = get_images)
         t2 = Thread(target = get_data)
