@@ -46,15 +46,21 @@ def get_data():
         url_1 = 'https://pokeapi.co/api/v2/pokemon/' + poke_number + '/'
         url_2 = 'https://pokeapi.co/api/v2/pokemon-species/' + poke_number + '/'
         path = 'pokedex/static/pokemon/json/'
-        response_1 = requests.get(url_1, stream=True)
-        response_2 = requests.get(url_2, stream=True)
-        if response_1.status_code==200 and response_2.status_code==200:
-            json_data_1 = json.loads(response_1.text)
-            json_data_2 = json.loads(response_2.text)
-            exists = os.path.isfile(path + format(num, '03d') + '_' + json_data_1['name'] + '.json')
-            if exists:
-                print('Data for ' + json_data_1['name'] + ' already exists.')
-            else:
+        exists = False
+        exist_name = ""
+        for i in os.listdir(path):
+            if i.startswith(format(num, '03d')):
+                exists = True
+                exist_name = i
+                break
+        if exists:
+            print('Data for ' + exist_name[4:-5] + ' already exists.')
+        else:
+            response_1 = requests.get(url_1, stream=True)
+            response_2 = requests.get(url_2, stream=True)
+            if response_1.status_code==200 and response_2.status_code==200:
+                json_data_1 = json.loads(response_1.text)
+                json_data_2 = json.loads(response_2.text)
                 for item in range(len(json_data_2['flavor_text_entries'])):
                     if json_data_2['flavor_text_entries'][item]['language']['name'] == 'en':
                         description = json_data_2['flavor_text_entries'][item]['flavor_text']
@@ -70,19 +76,18 @@ def get_data():
                     'gen' : json_data_2['generation']['name']
                 }
                 pokemon = json.dumps(poke_data)
-                
                 f = open(path + format(json_data_1['id'], '03d') + '_' + json_data_1['name'] + '.json', 'w')
                 f.write(pokemon)
                 print('Pokemon data for for ' + str(num) + '-' + json_data_1['name'] + ' downloaded.')
                 if num == poke_total:
                     print('\n** Pokemon data directory download complete. **\n')               
-        else:
-            print(str(response_1.status_code) + ' for response 1 and ' + str(response_2.status_code) + ' for response 2.')
-            break
+            else:
+                print(str(response_1.status_code) + ' for response 1 and ' + str(response_2.status_code) + ' for response 2.')
+                break
 
 if __name__ == '__main__':
     subprocess.call(["pipenv", "install"] ) 
-    poke_total = get_poke_count()
+    poke_total = 150
     if poke_total!=None and type(poke_total)==int:
         t1 = Thread(target = get_images)
         t2 = Thread(target = get_data)
