@@ -30,12 +30,10 @@ for page in range(0, page_total):
         page_range_index['end'] = poke_total
 
 @app.route("/")
-@app.route("/index")
+@app.route("/home")
 def index():
-    return render_template('index.html', data=pokemon_data, start=0, end=num_results, page_num=1, page_total=page_total)
+    return render_template('home.html')
 
-
-@app.route('/<page>')
 @app.route('/index/<page>')
 def index_pages(page):
     try:
@@ -44,17 +42,24 @@ def index_pages(page):
     except ValueError:
         return render_template('error.html', the_error="To request page, param must be a number."), 404
     except:
-        return render_template('error.html', the_error="The requested page doesn't exist."), 404
-        
+        return render_template('error.html', the_error="The requested page doesn't exist."), 404    
     if page < 1:
+        return render_template('error.html', the_error="The requested page can't be a negative number."), 404
+    return render_template('index.html', data=pokemon_data, start=current_page['start'], end=current_page['end'], page_num=page, page_total=page_total)
+
+
+@app.route('/table/<page>')
+def table(page):
+    try:
+        page = int(page)
+        current_page = pages[page-1] 
+    except ValueError:
+        return render_template('error.html', the_error="To request page, param must be a number."), 404
+    except:
         return render_template('error.html', the_error="The requested page doesn't exist."), 404
-    else:
-        return render_template('index.html', data=pokemon_data, start=current_page['start'], end=current_page['end'], page_num=page, page_total=page_total)
-
-
-@app.route('/table')
-def table():
-    return render_template('table.html', data=pokemon_data)
+    if page < 1:
+        return render_template('error.html', the_error="The requested page can't be a negative number."), 404  
+    return render_template('table.html', data=pokemon_data, start=current_page['start'], end=current_page['end'], page_num=page, page_total=page_total)
 
 
 @app.route("/pokemon/<pokemon>")
@@ -66,11 +71,9 @@ def pokemon(pokemon):
         return render_template('error.html', the_error="To request page, param must be a number."), 404
     except:
         return render_template('error.html', the_error="The requested page doesn't exist."), 404
-
     if poke_num < 1:
-        return render_template('error.html', the_error="The requested page doesn't exist."), 404
-    else:    
-        return render_template('pokemon.html', pokemon=current_pokemon, poke_total=poke_total)
+        return render_template('error.html', the_error="The requested page can't be a negative number."), 404  
+    return render_template('pokemon.html', pokemon=current_pokemon, poke_total=poke_total)
 
 
 @app.route("/search", methods=['POST'])    

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8 text-center justify-content-center">
+            <h2>Welcome to the Pokedex!</h2>
+            <br><br>
+            <img id="img_nav" src="/static/images/pokeball.png" width="200" height="200" alt="">
+    </div>
+    <div class="col-2"></div>
+</div>
+<br><br>
+<div class="row">
+    <div class="col"></div>
+    <div class="col text-center justify-content-center">
+        <a class="btn-lg btn btn-primary my-2 my-sm-0" href="/table/1">Table View</a>
+        <a class="btn-lg btn btn-primary my-2 my-sm-0" href="/index/1">Index View</a>
+    </div>
+    <div class="col"></div>
+</div>
+{% endblock main %}
