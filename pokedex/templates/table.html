@@ -45,7 +45,7 @@
                 <td>{{ data[item]['color'] }}</td>
                 <td>{{ data[item]['height']/10 }} m</td>
                 <td>{{ data[item]['weight']/10 }} kg</td>
-                <td><a href="/pokemon/{{ item['number'] }}" class="btn btn-secondary">View Pokemon</a></td>
+                <td><a href="/pokemon/{{ data[item]['number'] }}" class="btn btn-secondary">View Pokemon</a></td>
             </tr>
             {% endfor %}
         </tbody>

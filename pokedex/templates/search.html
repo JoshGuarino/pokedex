@@ -5,7 +5,11 @@
 <div class="row">
     <div class="col-3"></div>
     <div class="col-6">
-        <h2>Search Results for: '{{ query }}'</h2>
+        {% if search_list|length > 0 %}
+            <h2>Search Results for: '{{ query }}'</h2>
+        {% elif search_list|length == 0 %}
+            <h2>Your search of '{{ query }}' returned no results. Please search by the number or name.</h2>
+        {% endif %}
     </div>
     <div class="col-3"></div>
 </div>
