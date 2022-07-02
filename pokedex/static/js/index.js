@@ -1,5 +1,7 @@
 document.getElementById("overlay").style.display = "block";
 
 function off() {
-  document.getElementById("overlay").style.display = "none";
+  setTimeout(() => {
+    document.getElementById("overlay").style.display = "none";
+  }, 500)
 }

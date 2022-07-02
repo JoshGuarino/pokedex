@@ -4,7 +4,7 @@ import subprocess
 #terminal commands to run the app
 def run_app():
     os.chdir('pokedex')
-    subprocess.call(["py", "app.py"])
+    subprocess.call(["python3", "app.py"])
 
 #install depedencies
 def dep_install():
